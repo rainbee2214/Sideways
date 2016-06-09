@@ -11,3 +11,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial.unity
   - enabled: 1
     path: Assets/Scenes/Main.unity
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity

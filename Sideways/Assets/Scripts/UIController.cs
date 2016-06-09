@@ -4,14 +4,14 @@ using System.Collections;
 
 public class UIController : MonoBehaviour
 {
-
+    public bool tutorial = true;
     public Text coinText, startText, actionText, timeText, boostText;
 
     void Update()
     {
-        coinText.text = TutorialController.controller.player.coins.ToString();
-        startText.text = TutorialController.controller.player.stars.ToString();
-        boostText.text = TutorialController.controller.player.boosts.ToString();
+        coinText.text = (tutorial ? TutorialController.controller.player.coins.ToString() : GameController.controller.player.coins.ToString());
+        startText.text = (tutorial ? TutorialController.controller.player.coins.ToString() : GameController.controller.player.stars.ToString());
+        boostText.text = (tutorial ? TutorialController.controller.player.coins.ToString() : GameController.controller.player.boosts.ToString());
     }
 
 }

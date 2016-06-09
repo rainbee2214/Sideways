@@ -158,7 +158,7 @@ public class TutorialController : MonoBehaviour
     public void LoadGame()
     {
         //At end of tutorial, load the real game
-        SceneController.controller.LoadScene((int)SceneType.Game);
+        SceneController.controller.LoadScene(SceneType.Game);
     }
     public IEnumerator WaitForInput()
     {

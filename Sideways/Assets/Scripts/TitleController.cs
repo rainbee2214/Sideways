@@ -52,12 +52,12 @@ public class TitleController : MonoBehaviour
         {
             startGame = true;
             readyToStart = false;
-            SceneController.controller.LoadScene((int)SceneType.Tutorial);
+            SceneController.controller.LoadScene(SceneType.Tutorial);
         }
         if (readyToStart && Input.GetButtonDown("StartGame"))
         {
             startGame = true;
-            SceneController.controller.LoadScene((int)SceneType.Game);
+            SceneController.controller.LoadScene(SceneType.Game);
         }
     }
 

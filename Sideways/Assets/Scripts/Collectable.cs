@@ -36,7 +36,20 @@ public class Collectable : MonoBehaviour
             Player p = other.GetComponent<Player>();
             if (p != null)
             {
-                //things
+                gameObject.SetActive(false);
+                p.Collect(currentType);
+                switch (currentType)
+                {
+                    case Type.Coin:
+                        AudioController.controller.PlaySound(SoundType.Coin);
+                        break;
+                    case Type.Star:
+                        AudioController.controller.PlaySound(SoundType.Star);
+                        break;
+                    case Type.Boost:
+                        AudioController.controller.PlaySound(SoundType.Boost);
+                        break;
+                }
             }
         }
     }

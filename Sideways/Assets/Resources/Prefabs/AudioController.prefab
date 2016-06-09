@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 461132}
   - 82: {fileID: 8235712}
   - 114: {fileID: 11409572}
+  - 81: {fileID: 8184466}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -29,6 +30,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!81 &8184466
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101148}
+  m_Enabled: 1
 --- !u!82 &8235712
 AudioSource:
   m_ObjectHideFlags: 1
@@ -117,6 +125,7 @@ MonoBehaviour:
   coinClip: {fileID: 8300000, guid: 95a3a24fe0a61cc489b3fdb44ef435db, type: 3}
   starClip: {fileID: 8300000, guid: af6b2ac24c119e443b28b7e010db34b2, type: 3}
   portalClip: {fileID: 8300000, guid: 2daaddeb4082ec94c929ca45546a7517, type: 3}
+  boostClip: {fileID: 8300000, guid: 666646af1feb69f468a5e9fb099963df, type: 3}
   deathClip: {fileID: 8300000, guid: fe1d021110e7d9c4abda607b459efa35, type: 3}
   backgroundSong: {fileID: 8300000, guid: 788389bdb845ff947a817db681b02d34, type: 3}
 --- !u!1001 &100100000

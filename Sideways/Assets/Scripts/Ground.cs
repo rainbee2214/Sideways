@@ -13,8 +13,6 @@ public class Ground : MonoBehaviour
 
     List<SpriteRenderer> srs;
 
-
-
     void Awake()
     {
         ground = this;

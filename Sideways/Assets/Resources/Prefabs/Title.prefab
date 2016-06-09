@@ -550,7 +550,6 @@ MonoBehaviour:
   delay: 0.0001
   fullLogoTime: 0.25
   splashLogo: {fileID: 11406618}
-  globalGameJamLogo: {fileID: 0}
 --- !u!114 &11498580
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        yMax = Ground.ground.worldHeight;
+        //yMax = Ground.ground.worldHeight;
         xMax = Ground.ground.width * Ground.ground.delta;
     }
     void Update()

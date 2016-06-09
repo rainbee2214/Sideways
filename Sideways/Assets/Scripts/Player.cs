@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     public float maxSpeed = 10f;
     public bool facingRight = true;
     Animator anim;
@@ -21,16 +21,28 @@ public class Player : MonoBehaviour
 
     float gravityScaleSlam;
     float gravityScaleNormal;
+
+    public bool allowMovement;
+
+    public Vector2 startPosition;
+
+    bool isFallingNow = false;
+
+    
+    public int coins, stars, boosts;
     void Awake()
     {
         anim = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         gravityScaleNormal = rb2d.gravityScale;
         gravityScaleSlam = rb2d.gravityScale * 2f;
+        startPosition = transform.position;
     }
+
 
     void Update()
     {
+        if (!allowMovement) return;
         if ((grounded || !doubleJump) && Input.GetButtonDown("Jump"))
         {
             if (grounded) Jump();
@@ -42,17 +54,42 @@ public class Player : MonoBehaviour
 
         }
 
+        if (!grounded && rb2d.velocity.y < 0 && !isFallingNow)
+        {
+            isFallingNow = true;
+            anim.SetTrigger("JumpFall");
+            Debug.Log(".");
+        }
+        else if (grounded)
+        {
+            isFallingNow = false;
+        }
+
         if (!grounded && Input.GetButtonDown("Slam"))
         {
             slam = true;
             rb2d.gravityScale = gravityScaleSlam;
         }
+        if (!grounded && Input.GetButtonDown("Boost") && boosts > 0)
+        {
+            Boost();
+            boosts--;
+        }
     }
 
+    public bool Jumping()
+    {
+        return (!grounded && rb2d.velocity.y > 0);
+    }
+    public bool Falling()
+    {
+        return (!grounded && rb2d.velocity.y < 0);
+    }
     void FixedUpdate()
     {
+        if (!allowMovement) return;
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), !grounded);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), Jumping());
         if (grounded)
         {
             if (slam)
@@ -61,25 +98,34 @@ public class Player : MonoBehaviour
                 rb2d.gravityScale = gravityScaleNormal;
             }
             doubleJump = false;
+
         }
         anim.SetBool("Grounded", grounded);
 
         if (grounded) anim.SetFloat("vSpeed", 0f);
         else if (!slam)
         {
-            Debug.Log(vSpeed);
             anim.SetFloat("vSpeed", rb2d.velocity.y);
         }
-        else anim.SetFloat("vSpeed", -1000);
+        else
+        {
+            anim.SetFloat("vSpeed", -1000);
+        }
 
         if (!slam) Move();
     }
 
+    public void Boost()
+    {
+        rb2d.velocity = Vector2.zero;
+        rb2d.AddForce(new Vector2(jumpForce * 2f * (facingRight ? 1 : -1), jumpForce));
+    }
     public void Jump()
     {
-        Debug.Log("Jumping");
+
         anim.SetBool("Grounded", false);
-        rb2d.AddForce(new Vector2(0, jumpForce));
+        if (doubleJump) rb2d.velocity = Vector2.zero;
+        rb2d.AddForce(new Vector2(0, (doubleJump ? jumpForce / 1.25f : jumpForce)));
     }
 
     public void Move()
@@ -96,11 +142,32 @@ public class Player : MonoBehaviour
 
 
 
+
     void Flip()
     {
         facingRight = !facingRight;
         Vector3 thescale = transform.localScale;
         thescale.x *= -1;
         transform.localScale = thescale;
+    }
+
+
+    public void Collect(Collectable.Type collectable)
+    {
+        switch (collectable)
+        {
+            case Collectable.Type.Coin:  
+                coins++;
+                break;
+            case Collectable.Type.Star:
+                stars++;
+                break;
+            case Collectable.Type.Boost:
+                boosts++;
+                break;
+            default:
+                break;
+        }
+
     }
 }
