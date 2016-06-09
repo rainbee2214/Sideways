@@ -15,7 +15,15 @@ public class AudioController : MonoBehaviour
 
     void Awake()
     {
-        controller = this;
+        if (controller == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            controller = this;
+        }
+        else if (controller != this)
+        {
+            Destroy(gameObject);
+        }
         audioSource = GetComponent<AudioSource>();
         PlaySound(SoundType.Background);
     }

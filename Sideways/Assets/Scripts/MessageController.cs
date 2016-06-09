@@ -47,7 +47,7 @@ public class MessageController : MonoBehaviour
     //x and y positions must be [0,1] : think of them as percentages of screen width and height
     public Vector2 startPosition = new Vector2(0.2f, 0.2f), endPosition = new Vector2(0.8f, 0.4f);
 
-    MessagePanel messagePanel;
+    public MessagePanel messagePanel;
     Canvas canvas;
 
     [Header("For testing")]
@@ -92,6 +92,7 @@ public class MessageController : MonoBehaviour
     void Start()
     {
         startColor = messagePanel.CurrentColor;
+        messagePanel.transform.parent.SetParent(transform);
     }
 
     void Update()

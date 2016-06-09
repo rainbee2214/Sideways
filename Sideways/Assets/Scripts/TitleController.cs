@@ -5,15 +5,10 @@ using System.Collections;
 
 public class TitleController : MonoBehaviour
 {
-    [Header("Canvases")]
     public GameObject SplashCanvas, titleCanvas;
-    [Header("Background")]
-    [Header("Splash Variables")]
     public float delay;
     public float fullLogoTime;
-    [Header("SplashImages")]
     public Image splashLogo;
-    public Image globalGameJamLogo;
 
     Color white;
     Color transparent;
@@ -26,7 +21,6 @@ public class TitleController : MonoBehaviour
     {
         SplashCanvas.SetActive(splash);
         titleCanvas.SetActive(title);
-
     }
 
     void Start()
@@ -58,10 +52,12 @@ public class TitleController : MonoBehaviour
         {
             startGame = true;
             readyToStart = false;
+            SceneController.controller.LoadScene((int)SceneType.Tutorial);
         }
-        if (readyToStart && Input.anyKeyDown)
+        if (readyToStart && Input.GetButtonDown("StartGame"))
         {
-            SceneManager.LoadScene(1);
+            startGame = true;
+            SceneController.controller.LoadScene((int)SceneType.Game);
         }
     }
 
@@ -102,7 +98,6 @@ public class TitleController : MonoBehaviour
         }
         ShowCanvases(false, false);
 
-        TutorialController.controller.StartTutorial();
         yield return null;
     }
 }

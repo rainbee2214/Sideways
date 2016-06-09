@@ -25,6 +25,7 @@ public class TutorialController : MonoBehaviour
 
     void Start()
     {
+        StartTutorial();
     }
 
     public void StartTutorial()
@@ -153,6 +154,12 @@ public class TutorialController : MonoBehaviour
             //}
         }
     }
+
+    public void LoadGame()
+    {
+        //At end of tutorial, load the real game
+        SceneController.controller.LoadScene((int)SceneType.Game);
+    }
     public IEnumerator WaitForInput()
     {
         waitingForInput = true;
@@ -182,10 +189,8 @@ public class TutorialController : MonoBehaviour
         }
         sr.gameObject.SetActive(false);
         //Change to game controller
-        Debug.Log("....Before");
         NextLevel(destination);
         yield return new WaitForSeconds(1f);
-        Debug.Log("....");
         maps[destination].SetActive(true);
         sr.transform.position = TutorialController.controller.player.startPosition;
         sr.gameObject.SetActive(true);

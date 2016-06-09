@@ -77,7 +77,6 @@ public class TutorialPlayer : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log("Jumping " + Jumping() + " Falling " + Falling());
         if (!allowMovement) return;
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Ground"), Jumping());
